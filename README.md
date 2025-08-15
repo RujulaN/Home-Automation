@@ -32,25 +32,62 @@ It enables **remote monitoring and control** of home appliances, ensuring securi
 
 ---
 
-## 🛠 Components Used
-- **ESP32 Development Board**
-- **RFID Module (RC522)**
-- **Water Level Sensor**
-- **Gas Sensor (MQ-2 / MQ-5)**
-- **PIR Motion Sensor**
-- **LDR Sensor**
-- **Relay Module**
-- **Buzzer**
-- **Arduino IoT Cloud** platform
-- Jumper wires, breadboard, and power supply
+## 🛠 Components and Their Working
 
----
+### **1. ESP32 Microcontroller**
+- **Purpose:** The brain of the system.
+- **Working:**
+  - Reads data from sensors (RFID, gas sensor, LDR, PIR, water level sensor).
+  - Controls actuators (relay, buzzer, exhaust fan, lights).
+  - Connects to **Arduino IoT Cloud** via Wi-Fi for remote monitoring and control.
 
-## 🔌 Working Principle
-1. **Sensors** continuously monitor environmental conditions (water level, gas, light, motion).
-2. **ESP32** processes sensor data and sends it to the **Arduino IoT Cloud**.
-3. **User Interface**: Mobile app or web dashboard for remote control and monitoring.
-4. **Automation Rules**: Based on sensor readings, devices are switched on/off automatically.
+### **2. RFID Module (RC522)**
+- **Purpose:** Provides secure door access.
+- **Working:**
+  - Reads the unique ID of an RFID tag.
+  - If the ID matches a stored authorized ID, the ESP32 unlocks the door.
+  - Unauthorized attempts trigger the buzzer.
 
----
+### **3. Water Level Sensor**
+- **Purpose:** Monitors water tank levels.
+- **Working:**
+  - Detects water presence at different levels.
+  - Empty tank → motor ON.
+  - Full tank → motor OFF.
+
+### **4. Gas Sensor (MQ-2 / MQ-5)**
+- **Purpose:** Detects LPG gas leaks.
+- **Working:**
+  - Monitors air for LPG concentration.
+  - On leak detection → cuts kitchen power, closes regulator, activates buzzer, turns on exhaust fan, and sends IoT alert.
+
+### **5. PIR Motion Sensor**
+- **Purpose:** Detects human movement.
+- **Working:**
+  - Senses infrared changes caused by movement.
+  - In darkness, motion triggers lights ON.
+
+### **6. LDR (Light Dependent Resistor)**
+- **Purpose:** Detects light intensity.
+- **Working:**
+  - Low light → triggers lights ON (if motion detected).
+  - Bright light → lights OFF.
+
+### **7. Relay Module**
+- **Purpose:** Controls high-voltage devices.
+- **Working:**
+  - Acts as a switch controlled by ESP32 to turn appliances ON/OFF.
+
+### **8. Buzzer**
+- **Purpose:** Gives audible alerts.
+- **Working:**
+  - Activated during unauthorized access or emergencies.
+
+### **9. Arduino IoT Cloud**
+- **Purpose:** Enables remote access.
+- **Working:**
+  - Receives real-time data from ESP32.
+  - Allows monitoring and control via web or mobile dashboard.
+
+
 
